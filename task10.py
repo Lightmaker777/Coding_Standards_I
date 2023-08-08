@@ -1,14 +1,16 @@
-def my_custom_validation_function(
-        one=False, two=False, three=False, four=False, five=False,
-        six=True, seven=True, eight=True, nine=True, ten=True):
+def check_arguments(**kwargs):
+    # Checking arguments before the conditional
+    first_five_true = all(value is True for value in list(kwargs.values())[:5])
+    last_five_false = all(
+        value is False for value in list(kwargs.values())[5:])
 
-    if (
-        one and two and three and four and five
-        and not six and not seven and not eight and not nine and not ten
-    ):
-        print("arguments are ok")
+    if first_five_true and last_five_false:
+        print("ok")  # arguments are ok
+    else:
+        print("not ok")
 
 
-my_custom_validation_function(
-    one=True, two=True, three=True, four=True, five=True,
-    six=False, seven=False, eight=False, nine=False, ten=False)
+check_arguments(
+    arg1=True, arg2=True, arg3=True, arg4=True,
+    arg5=True, arg6=False, arg7=False, arg8=False,
+    arg9=False, arg10=False)
